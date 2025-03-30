@@ -1,4 +1,4 @@
-import { Animated, GestureResponderEvent } from "react-native";
+import { Animated } from "react-native";
 
 export interface CustomButtomProps  {
    title: string,
