@@ -1,8 +1,9 @@
 import { Pressable, PressableProps, View, Text } from "react-native";
+import { CustomButtomProps } from "./CustomButtomProps";
 
 
-export const CustomButton = ({title, viewStyle, textStyle, ...props}: PressableProps & {title: string} & {viewStyle: object} & {textStyle: object}) => {
-
+export const CustomButton = ({...props}: PressableProps & CustomButtomProps) => {
+    const { title, viewStyle, textStyle } = props;
     return(
         <Pressable {...props}>
             <View style={viewStyle}>
