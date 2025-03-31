@@ -1,6 +1,6 @@
 import { Animated } from "react-native";
 
-export interface CustomButtomProps  {
+export interface CustomButtonProps  {
    title: string,
    viewStyle: object,
    textStyle: object,
@@ -9,4 +9,8 @@ export interface CustomButtomProps  {
    fadeOut?: typeof Animated,
    onPressIn?: () => void,
    onPressOut?: () => void,
+};
+
+export interface CustomLinkProps  {
+   route?: string,
 };

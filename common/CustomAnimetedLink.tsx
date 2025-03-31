@@ -1,9 +1,10 @@
 import { Pressable, PressableProps, View, Text, Animated, GestureResponderEvent } from "react-native";
-import { CustomButtonProps } from "./CustomProps";
+import { Link } from "expo-router";
+import { CustomButtonProps, CustomLinkProps } from "./CustomProps";
 
 
-export const CustomAnimatedButton = ({...props}: PressableProps & CustomButtonProps) => {
-    const { title, viewStyle, textStyle, backGroundColor, fadeIn, fadeOut } = props;
+export const CustomAnimatedLink = ({...props}: PressableProps & CustomButtonProps & CustomLinkProps) => {
+    const { title, viewStyle, textStyle, backGroundColor, fadeIn, fadeOut, route } = props;
 
     const _onPressIn = (e: GestureResponderEvent) => {
         if(fadeIn) {
@@ -21,9 +22,11 @@ export const CustomAnimatedButton = ({...props}: PressableProps & CustomButtonPr
 
     return(
         <Pressable {...props} onPressIn={_onPressIn} onPressOut={_onPressOut}>
-            <Animated.View style={{...viewStyle, backgroundColor: backGroundColor}}>
-                <Text style={textStyle}>{title}</Text>
-            </Animated.View>
+            <Link href={route} style={viewStyle}>
+                <Animated.View style={{backgroundColor: backGroundColor}}>
+                    <Text style={textStyle}>{title}</Text>
+                </Animated.View>
+            </Link>
         </Pressable>
     );
 

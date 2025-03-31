@@ -1,11 +1,11 @@
 import { Animated,  StyleSheet, Text, View, ImageBackground, Dimensions } from 'react-native';
-import { CustomAnimatedButton } from '../common/CustomAnimatedButton';
 import { useRef } from 'react';
 import { COLORS } from '../common/CONSTANTS';
+import { CustomAnimatedLink } from '../common/CustomAnimetedLink';
 
 
 
-export const StartScreen = () => {
+export default function StartScreen() {
 
 ////Animation button
   const animatedColorButtonValue = new Animated.Value(100);
@@ -73,7 +73,14 @@ export const StartScreen = () => {
           </Animated.View>
         </ImageBackground>
         <Text style={styles.h3}>{`Свежие зёрна, настоящая арабика и бережная обжарка`}</Text>
-        <CustomAnimatedButton viewStyle={styles.button} textStyle={styles} title={'Начать'} backGroundColor={colorButton} fadeIn={fadeInButton} fadeOut={fadeOutButton} />
+        <CustomAnimatedLink viewStyle={styles.button}
+                            textStyle={styles}
+                            title={'Начать'}
+                            backGroundColor={colorButton}
+                            fadeIn={fadeInButton}
+                            fadeOut={fadeOutButton}
+                            route={'/catalog'}
+        />
       </View>
     );
 };
