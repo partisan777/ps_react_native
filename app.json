@@ -13,7 +13,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportedDevices": ["iPhone", "iPad"],
+      "requireFullScreen": false,
+      "userInterfaceStyle": "light",
+      "buildNumber": "1.0.0",
+      "infoPlist": {}
     },
     "android": {
       "adaptiveIcon": {

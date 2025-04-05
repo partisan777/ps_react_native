@@ -10,7 +10,3 @@ export interface CustomButtonProps  {
    onPressIn?: () => void,
    onPressOut?: () => void,
 };
-
-export interface CustomLinkProps  {
-   route?: string,
-};

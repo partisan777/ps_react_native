@@ -1,12 +1,12 @@
 import { Animated,  StyleSheet, Text, View, ImageBackground, Dimensions } from 'react-native';
 import { useRef } from 'react';
 import { COLORS } from '../common/CONSTANTS';
-import { CustomAnimatedLink } from '../common/CustomAnimetedLink';
-
+import { CustomAnimatedButton } from '../shared/button/CustomAnimatedButton';
+import { useRouter } from 'expo-router';
 
 
 export default function StartScreen() {
-
+  const router = useRouter();
 ////Animation button
   const animatedColorButtonValue = new Animated.Value(100);
 
@@ -30,13 +30,14 @@ export default function StartScreen() {
 ////Animation padding top
   const windowHeight = Dimensions.get('window').height;
   const paddingAnimation = (
-    styles.button.height +
+    styles.button.height  * 1.5 +
     styles.button.marginBottom +
     styles.h3.maxHeight +
     styles.h3.marginBottom +
     styles.h1.marginBottom +
     styles.h1.maxHeight
   );
+  // console.log(windowHeight, paddingAnimation)
 
   const animatedTextValue = new Animated.ValueXY({
 		x: 0,
@@ -63,6 +64,11 @@ export default function StartScreen() {
     useNativeDriver: true
   }).start();
 
+  const handleButtonOnpressOut = () => {
+    router.replace('/catalog')
+  };
+
+
   return (
       <View style={styles.container}>
         <ImageBackground source={require('../assets/cup.png')} resizeMode="cover" style={styles.backGrounImage}>
@@ -73,13 +79,13 @@ export default function StartScreen() {
           </Animated.View>
         </ImageBackground>
         <Text style={styles.h3}>{`Свежие зёрна, настоящая арабика и бережная обжарка`}</Text>
-        <CustomAnimatedLink viewStyle={styles.button}
+        <CustomAnimatedButton viewStyle={styles.button}
                             textStyle={styles}
                             title={'Начать'}
                             backGroundColor={colorButton}
                             fadeIn={fadeInButton}
                             fadeOut={fadeOutButton}
-                            route={'/catalog'}
+                            onPressIn={handleButtonOnpressOut}
         />
       </View>
     );
@@ -111,12 +117,10 @@ const styles = StyleSheet.create({
     width: 315,
     height: 62,
     borderRadius: 16,
-    paddingTop: 20,
-    paddingRight: 109,
-    paddingBottom: 20,
-    paddingLeft: 109,
     marginBottom: 28,
     backgroundColor: COLORS.BROWN_LIGHT,
+    justifyContent: 'center',
+    alignItems: 'center',
   }, buttonText: {
     textAlign: 'center',
     fontSize: 16,
