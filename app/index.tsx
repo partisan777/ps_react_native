@@ -71,7 +71,7 @@ export default function StartScreen() {
 
   return (
       <View style={styles.container}>
-        <ImageBackground source={require('../assets/cup.png')} resizeMode="cover" style={styles.backGrounImage}>
+        <ImageBackground source={require('../assets/cup.png')} resizeMode="cover" style={styles.backGroundImage}>
           <Animated.View style={[styles.animatedTextWiew, opacityStyle]}>
             <Animated.View style={{...styles.animatedTextWiew, paddingTop: animatedTextValue.y}}>
               <Text style={styles.h1}>{`Одно из самых вкусных кофе в городе!`}</Text>
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     color: COLORS.WHITE,
-  }, backGrounImage: {
+  }, backGroundImage: {
     width: '100%',
     height: '85%',
     flex: 1,

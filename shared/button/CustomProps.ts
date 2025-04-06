@@ -1,8 +1,8 @@
 import { Animated } from "react-native";
 
 export interface CustomButtonProps  {
-   title: string,
-   viewStyle: object,
+   title: string | unknown,
+   viewStyle: object | object[],
    textStyle: object,
    backGroundColor?: object,
    fadeIn?: typeof Animated,

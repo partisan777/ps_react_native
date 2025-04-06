@@ -1,4 +1,4 @@
-import { Pressable, PressableProps, Text, Animated, GestureResponderEvent } from "react-native";
+import { Pressable, PressableProps, Text, Animated, GestureResponderEvent, Image } from "react-native";
 import { CustomButtonProps } from "./CustomProps";
 
 
@@ -24,11 +24,20 @@ export const CustomAnimatedButton = ({...props}: PressableProps & CustomButtonPr
         };
         props.onPressIn && props.onPressIn(e);
     }
+     const _viewStyle = Array.isArray(viewStyle) ? viewStyle.reduce(function (result, item) {
+            return {
+                ...result,
+                ...item
+            }
+        }) : viewStyle;
+
+    const viewStyles = backGroundColor ? {..._viewStyle, backgroundColor: backGroundColor} : {..._viewStyle};
 
     return(
         <Pressable {...props} onPressIn={_onPressIn} onPressOut={_onPressOut}>
-            <Animated.View style={{...viewStyle, backgroundColor: backGroundColor}}>
-                <Text style={textStyle}>{title}</Text>
+            <Animated.View style={viewStyles}>
+                {typeof title === 'string' && <Text style={textStyle}>{title}</Text>}
+                {typeof title === 'number' && <Image style={textStyle} resizeMode="cover" source={title} />}
             </Animated.View>
         </Pressable>
     );
