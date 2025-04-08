@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import { View, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, FlatList, ActivityIndicator, StyleSheet, Dimensions } from 'react-native';
 import { useAtom } from 'jotai';
 import { productsAtom, loadingAtom } from '../../store/Produts';
 import { CatalogItem } from '../catalog-item/CatalogItem';
@@ -20,7 +20,7 @@ const CatalogItemsList = ({...props}: CatalogItemListProps) => {
       try {
         const response = await axios.get(url)
         setProducts(response.data);
-        console.log('props', url);
+        // console.log('props', url);
         setLoading(false);
       } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -45,15 +45,22 @@ const CatalogItemsList = ({...props}: CatalogItemListProps) => {
     return <ItemNotFound />
   };
 
+  const containerHeight = Dimensions.get('window').height - 320;
+
   return (
-    <FlatList
-      contentContainerStyle={styles.catalogItemsList}
-      scrollEnabled={true}
-      data={products}
-      numColumns={2}
-      renderItem={({ item }) => <CatalogItem {...item} />}
-      keyExtractor={(item) => item.id.toString()}
-    />
+    <View style={{ height: containerHeight }}>
+      <FlatList
+        contentContainerStyle={styles.catalogItemsList}
+        // style={styles.catalogItemsList}
+        initialNumToRender={20} // Увеличь начальное количество рендеримых элементов
+        removeClippedSubviews={false} // Отключить удаление внеэкранных подложек
+        scrollEnabled={true}
+        data={products}
+        numColumns={2}
+        renderItem={({ item }) => <CatalogItem {...item} />}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </View>
   );
 };
 
@@ -62,9 +69,12 @@ export default CatalogItemsList;
 
 const styles = StyleSheet.create({
   catalogItemsList: {
-    padding: 20,
+    // padding: 0,
     alignItems: 'center',
-    height: '100%',
+    // height: 400,
+    // flexGrow: 1,
+    // flex: 1,
+    // height: undefined
   },
 
 });

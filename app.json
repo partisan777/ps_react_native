@@ -13,11 +13,17 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportedDevices": ["iPhone", "iPad"],
+      "supportedDevices": [
+        "iPhone",
+        "iPad",
+        "iPhone",
+        "iPad"
+      ],
       "requireFullScreen": false,
       "userInterfaceStyle": "light",
       "buildNumber": "1.0.0",
-      "infoPlist": {}
+      "infoPlist": {},
+      "bundleIdentifier": "com.nekish.ps-react-native"
     },
     "android": {
       "adaptiveIcon": {

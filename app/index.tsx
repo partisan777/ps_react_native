@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { COLORS } from '../common/CONSTANTS';
 import { CustomAnimatedButton } from '../shared/button/CustomAnimatedButton';
 import { useRouter } from 'expo-router';
+import { navigate } from 'expo-router/build/global-state/routing';
 
 
 export default function StartScreen() {
@@ -65,7 +66,8 @@ export default function StartScreen() {
   }).start();
 
   const handleButtonOnpressOut = () => {
-    router.replace('/catalog')
+    // router.replace('/catalog')
+    router.navigate('/catalog')
   };
 
 

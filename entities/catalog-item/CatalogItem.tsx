@@ -34,10 +34,11 @@ export function CatalogItem (props: CatalogItemProps) {
 
 const styles = StyleSheet.create({
     container: {
+        // flex: 1,
         width: 140,
-        height: 239,
+        height: 250,
         borderRadius: RADIUSES.r16,
-        margin: 15,
+        margin: 20,
     },
     mainImage: {
         width: 141,
@@ -116,3 +117,4 @@ const styles = StyleSheet.create({
     },
 
 });
+// justifyContent: 'space-between',

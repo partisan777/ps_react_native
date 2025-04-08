@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
         gap: 8,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 28,
-        marginBottom: 24,
+        marginTop: 6,
+        marginBottom: 2,
     },
     buttonView: {
         justifyContent: 'center',

@@ -1,4 +1,6 @@
+import { COFFEE_TYPE } from "../../common/CONSTANTS"
+
 export type CatalogSearchButtonsProps = {
     coffeeType: string,
-    setCoffeeType: () => void,
+    setCoffeeType: (type: COFFEE_TYPE) => void,
 };
