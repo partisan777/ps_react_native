@@ -5,6 +5,7 @@ import { COLORS, PRODUCT_SIZE, RADIUSES } from "../../common/CONSTANTS";
 import OrderItem from "../../entities/order-item/OrderItem";
 import { OrderItemProps } from "../../entities/order-item/OrderItemProps";
 import OrderPriceItem from "../../entities/order-price-item/OrderPriceItem";
+import CustomLine from "../../shared/custo-line.tsx/CustomLine";
 
 
 const mockProps: OrderItemProps[] = [
@@ -67,6 +68,7 @@ export default function Cart() {
                         img={require('../../assets/edit-black.png')}
                     />
             </View>
+            <CustomLine {...styles.smallUnderLine} />
             <View style={
                 {
                     // height: containerHeight,
@@ -84,9 +86,14 @@ export default function Cart() {
                     keyExtractor={(item) => item.item.id.toString()}
                 />
             </View>
+            <CustomLine {...styles.bigUnderLine} />
             <Text style={styles.orderTotallabel}>{'Итог'}</Text>
             {
-                mockPriceItemData.map(item => <OrderPriceItem key={item.label} label={item.label} amount={item.amount} />)
+                mockPriceItemData.slice(0, -1).map(item => <OrderPriceItem key={item.label} label={item.label} amount={item.amount} />)
+            }
+            <CustomLine {...styles.smallUnderLine} />
+            {
+                mockPriceItemData.slice(-1).map(item => <OrderPriceItem key={item.label} label={item.label} amount={item.amount} />)
             }
             <View style={styles.OrderButtonContainer}>
                 <CustomAnimatedButton
@@ -205,5 +212,14 @@ const styles = StyleSheet.create({
         fontWeight: 600,
         fontSize: 16,
         color: COLORS.WHITE,
+    },
+    smallUnderLine: {
+        height: 1,
+        backgroundColor: COLORS.TAB_BAR_LIGHT_GRAY,
+        marginHorizontal: 30,
+    },
+    bigUnderLine: {
+        height: 4,
+        backgroundColor: COLORS.TAB_BAR_LIGHT_GRAY,
     },
 });

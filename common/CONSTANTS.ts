@@ -14,6 +14,7 @@ export const COLORS = {
     DARK_BROWN: '#2F2D2C',
     TEXT_DARK_GREY: '#303336',
     LIGHT_GRAY: '#EAEAEA',
+    TAB_BAR_LIGHT_GRAY: '#DEDEDE',
 };
 
 export const RADIUSES = {
