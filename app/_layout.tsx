@@ -14,7 +14,6 @@ export default function RootRayout() {
 			<StatusBar style="light" />
 			<Stack
 				screenOptions={{
-					// statusBarColor: COLORS.BLACK,
 					contentStyle: {
 						backgroundColor: COLORS.BLACK,
 						paddingTop: insets.top,

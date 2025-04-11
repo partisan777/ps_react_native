@@ -5,7 +5,9 @@ import { CustomAnimatedButton } from '../shared/button/CustomAnimatedButton';
 import { useRouter } from 'expo-router';
 
 
+
 export default function StartScreen() {
+
   const router = useRouter();
 ////Animation button
   const animatedColorButtonValue = new Animated.Value(100);
@@ -37,7 +39,6 @@ export default function StartScreen() {
     styles.h1.marginBottom +
     styles.h1.maxHeight
   );
-  // console.log(windowHeight, paddingAnimation)
 
   const animatedTextValue = new Animated.ValueXY({
 		x: 0,
@@ -65,13 +66,14 @@ export default function StartScreen() {
   }).start();
 
   const handleButtonOnpressOut = () => {
-    router.replace('/catalog')
+    // router.replace('/catalog')
+    router.navigate('/catalog')
   };
 
 
   return (
       <View style={styles.container}>
-        <ImageBackground source={require('../assets/cup.png')} resizeMode="cover" style={styles.backGrounImage}>
+        <ImageBackground source={require('../assets/cup.png')} resizeMode="cover" style={styles.backGroundImage}>
           <Animated.View style={[styles.animatedTextWiew, opacityStyle]}>
             <Animated.View style={{...styles.animatedTextWiew, paddingTop: animatedTextValue.y}}>
               <Text style={styles.h1}>{`Одно из самых вкусных кофе в городе!`}</Text>
@@ -125,7 +127,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     color: COLORS.WHITE,
-  }, backGrounImage: {
+  }, backGroundImage: {
     width: '100%',
     height: '85%',
     flex: 1,
