@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, Image, ImageBackground, Animated } from "react-native";
 import { CatalogItemProps } from './CatalogItemProps';
 import { RADIUSES, COLORS } from '../../common/CONSTANTS';
 import { CustomAnimatedButton } from "../../shared/button/CustomAnimatedButton";
@@ -7,7 +7,26 @@ import { CustomAnimatedButton } from "../../shared/button/CustomAnimatedButton";
 export function CatalogItem (props: CatalogItemProps) {
     const { id, name, subTitle, type, price, image, description, rating } = props;
 
-    return (
+    const animatedColorButtonValue = new Animated.Value(100);
+
+      const colorButton = animatedColorButtonValue.interpolate({
+            inputRange: [0, 100],
+            outputRange: [COLORS.BROWN, COLORS.BROWN_LIGHT]
+        });
+
+      const fadeInButton = Animated.timing(animatedColorButtonValue, {
+                toValue: 0,
+                duration: 100,
+                useNativeDriver: true
+        });
+
+      const fadeOutButton = Animated.timing(animatedColorButtonValue, {
+                toValue: 100,
+                duration: 100,
+                useNativeDriver: true
+        });
+
+        return (
         <View style={styles.container}>
             <View>
                 <ImageBackground source={{ uri: image, }} resizeMode="cover" style={styles.mainImage} />
@@ -23,9 +42,13 @@ export function CatalogItem (props: CatalogItemProps) {
             <View style={styles.priceContainer}>
                 <Text style={styles.price}>{price + ' ₽'}</Text>
                 <CustomAnimatedButton
-                    title={require('../../assets/add.png')}
+                    title={''}
                     viewStyle={styles.addToCartButtonView}
                     textStyle={styles.addToCartButtonText}
+                    img={require('../../assets/add.png')}
+                    backGroundColor={colorButton}
+                    fadeIn={fadeInButton}
+                    fadeOut={fadeOutButton}
                 />
             </View>
         </View>
@@ -34,25 +57,25 @@ export function CatalogItem (props: CatalogItemProps) {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        width: 140,
-        height: 250,
+        width: 155,
+        height: 280,
         borderRadius: RADIUSES.r16,
         margin: 20,
+        backgroundColor: COLORS.WHITE,
+        alignItems: 'center',
+        paddingTop: 4,
     },
     mainImage: {
         width: 141,
         height: 132,
         borderRadius: RADIUSES.r16,
-        marginLeft: 4,
-        marginRight: 4,
+        marginTop: 4,
     },
     ratingContainer: {
-        flex: 1,
         flexDirection: 'row',
         width: 55,
         height: 25,
-        paddingTop: 3,
+        paddingTop: 11,
         paddingRight: 8,
         paddingBottom: 3,
         paddingLeft: 8,
@@ -77,7 +100,10 @@ const styles = StyleSheet.create({
     titleContainer: {
         marginTop: 12,
         marginBottom: 12,
-        paddingLeft: 12,
+        paddingLeft: 5,
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start'
+
     },
     mainTitleText: {
         fontSize: 16,
@@ -117,4 +143,3 @@ const styles = StyleSheet.create({
     },
 
 });
-// justifyContent: 'space-between',

@@ -17,22 +17,24 @@ export function CatalogSearchButtons ({...props}: CatalogSearchButtonsProps) {
     ];
 
     return (
-        <View style={styles.container}>
+        <View>
             <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}
             >
-                {
-                    buttonList.map((item, index) => {
-                        return  <CustomAnimatedButton
-                                    key={item.id}
-                                    title={item.label}
-                                    viewStyle={[styles.buttonView, coffeeType === item.type && styles.activeButtonView]}
-                                    textStyle={styles.buttonText}
-                                    onPressIn={() => { setCoffeeType(item.type) }}
-                                />
-                    })
-                }
+                <View style={styles.container}>
+                    {
+                        buttonList.map((item, index) => {
+                            return  <CustomAnimatedButton
+                                        key={item.id}
+                                        title={item.label}
+                                        viewStyle={[styles.buttonView, coffeeType === item.type ? styles.activeButtonView : styles.notActiveButtonView]}
+                                        textStyle={styles.buttonText}
+                                        onPressIn={() => { setCoffeeType(item.type) }}
+                                    />
+                        })
+                    }
+                </View>
             </ScrollView>
         </View>
     );
@@ -51,9 +53,10 @@ const styles = StyleSheet.create({
     buttonView: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 105,
+        width: 103,
         height: 38,
         borderRadius: RADIUSES.r12,
+        gap: 5,
     },
     buttonText: {
         color: COLORS.DARK_GREEN,
@@ -61,5 +64,8 @@ const styles = StyleSheet.create({
     },
     activeButtonView: {
         backgroundColor: COLORS.BROWN_LIGHT,
+    },
+    notActiveButtonView: {
+        backgroundColor: COLORS.WHITE,
     },
 });

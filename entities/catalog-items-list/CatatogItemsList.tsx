@@ -45,7 +45,7 @@ const CatalogItemsList = ({...props}: CatalogItemListProps) => {
     return <ItemNotFound />
   };
 
-  const containerHeight = Dimensions.get('window').height - 320;
+  const containerHeight = Dimensions.get('window').height - 220;
 
   return (
     <View style={{ height: containerHeight }}>
@@ -69,12 +69,7 @@ export default CatalogItemsList;
 
 const styles = StyleSheet.create({
   catalogItemsList: {
-    // padding: 0,
     alignItems: 'center',
-    // height: 400,
-    // flexGrow: 1,
-    // flex: 1,
-    // height: undefined
   },
 
 });

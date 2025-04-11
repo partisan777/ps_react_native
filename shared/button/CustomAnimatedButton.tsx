@@ -3,7 +3,7 @@ import { CustomButtonProps } from "./CustomProps";
 
 
 export const CustomAnimatedButton = ({...props}: PressableProps & CustomButtonProps) => {
-    const { title, viewStyle, textStyle, backGroundColor, fadeIn, fadeOut, onPressIn, onPressOut } = props;
+    const { title, viewStyle, textStyle, backGroundColor, fadeIn, fadeOut, onPressIn, onPressOut, img, imgStyle } = props;
 
     const _onPressIn = (e: GestureResponderEvent) => {
         if(fadeIn) {
@@ -36,8 +36,8 @@ export const CustomAnimatedButton = ({...props}: PressableProps & CustomButtonPr
     return(
         <Pressable {...props} onPressIn={_onPressIn} onPressOut={_onPressOut}>
             <Animated.View style={viewStyles}>
-                {typeof title === 'string' && <Text style={textStyle}>{title}</Text>}
-                {typeof title === 'number' && <Image style={textStyle} resizeMode="cover" source={title} />}
+                {img ? <Image style={imgStyle} resizeMode="cover" source={img} /> : ''}
+                {title ? <Text style={textStyle}>{title}</Text> : ''}
             </Animated.View>
         </Pressable>
     );

@@ -1,17 +1,15 @@
-import { View } from "react-native";
-import Catalog from "./catalog"
-import { Link, Stack } from "expo-router";
+import {  Stack } from "expo-router";
 
-export function CatalogLayout() {
-    console.log(1111, 'catalog/_layout');
+export default function CatalogLayout() {
+
     return (
-        <>
-        {/* <View style={{backgroundColor: 'white', flex: 1}}> */}
-            <Catalog />
-            <Stack>
-                <Stack.Screen name="(tabs)"  />
-            </Stack>
-        {/* </View> */}
-        </>
+        <Stack>
+            <Stack.Screen
+                name="(tabs_catalog)"
+                options={{
+                    headerShown: false, // Убирает заголовок навигации
+                }}
+        />
+        </Stack>
     )
 };
