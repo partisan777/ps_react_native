@@ -39,7 +39,6 @@ export default function StartScreen() {
     styles.h1.marginBottom +
     styles.h1.maxHeight
   );
-  // console.log(windowHeight, paddingAnimation)
 
   const animatedTextValue = new Animated.ValueXY({
 		x: 0,

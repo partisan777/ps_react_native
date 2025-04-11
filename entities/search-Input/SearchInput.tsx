@@ -5,8 +5,6 @@ import { CustomInputProps } from "../../shared/input/CustomProps";
 
 export function SearchInput({...props}: TextInputProps & CustomInputProps) {
 
-    // console.log(typeof require('../../assets/search-normal.png'));
-
     const { onInputChange } = props;
     return (
         <View style={styles.searchContainer}>

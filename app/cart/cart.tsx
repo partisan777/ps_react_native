@@ -1,4 +1,3 @@
-import { Link } from "expo-router";
 import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
 import { CustomAnimatedButton } from "../../shared/button/CustomAnimatedButton";
 import { COLORS, PRODUCT_SIZE, RADIUSES } from "../../common/CONSTANTS";
@@ -43,8 +42,7 @@ const mockPriceItemData = [
 
 export default function Cart() {
     const containerHeight = Dimensions.get('window').height - 550;
-    console.log(Dimensions.get('window').height);
-    console.log(Dimensions.get('screen').height);
+
     return (
         <View style={styles.cartContainer}>
             <View style={styles.cartHeaderContainer}>
@@ -69,14 +67,7 @@ export default function Cart() {
                     />
             </View>
             <CustomLine {...styles.smallUnderLine} />
-            <View style={
-                {
-                    // height: containerHeight,
-                    // height: 190,
-                    flex: 1,
-                    // backgroundColor: 'red',
-                }
-            }>
+            <View style={{flex: 1,}}>
                 <FlatList
                     removeClippedSubviews={false}
                     scrollEnabled={true}

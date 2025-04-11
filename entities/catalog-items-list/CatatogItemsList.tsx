@@ -20,7 +20,6 @@ const CatalogItemsList = ({...props}: CatalogItemListProps) => {
       try {
         const response = await axios.get(url)
         setProducts(response.data);
-        // console.log('props', url);
         setLoading(false);
       } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -51,9 +50,8 @@ const CatalogItemsList = ({...props}: CatalogItemListProps) => {
     <View style={{ height: containerHeight }}>
       <FlatList
         contentContainerStyle={styles.catalogItemsList}
-        // style={styles.catalogItemsList}
-        initialNumToRender={20} // Увеличь начальное количество рендеримых элементов
-        removeClippedSubviews={false} // Отключить удаление внеэкранных подложек
+        initialNumToRender={20}
+        removeClippedSubviews={false}
         scrollEnabled={true}
         data={products}
         numColumns={2}

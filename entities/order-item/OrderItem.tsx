@@ -6,10 +6,9 @@ import { CustomAnimatedButton } from "../../shared/button/CustomAnimatedButton";
 
 
 
-export default function OrderItem(props: OrderItemProps) {
+export default function OrderItem({ count, item, size } : OrderItemProps) {
 
-    const { count, item, size } = props;
-    const { name, subTitle, image }= item;
+    const { name, subTitle, image } = item;
 
     return (
         <View style={styles.orderItemContainer} >

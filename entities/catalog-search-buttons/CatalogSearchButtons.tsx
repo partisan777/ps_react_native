@@ -1,20 +1,12 @@
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { CustomAnimatedButton } from '../../shared/button/CustomAnimatedButton';
-import { COFFEE_TYPE, COLORS, RADIUSES } from '../../common/CONSTANTS';
+import { COLORS, RADIUSES } from '../../common/CONSTANTS';
 import { CatalogSearchButtonsProps } from './CatalogSearchButtonsProps';
-
+import { buttonList } from '../../models/ButtonList';
 
 export function CatalogSearchButtons ({...props}: CatalogSearchButtonsProps) {
 
     const { coffeeType, setCoffeeType } = props;
-
-    const buttonList = [
-        { id: 0, label: 'Все', type: COFFEE_TYPE.ALL },
-        { id: 1, label: 'Капучино', type: COFFEE_TYPE.CAPPUCINO },
-        { id: 2, label: 'Маккиято', type: COFFEE_TYPE.MACCHIATO },
-        { id: 3, label: 'Латте', type: COFFEE_TYPE.LATTE },
-        { id: 4, label: 'Американо', type:  COFFEE_TYPE.AMERICANO }
-    ];
 
     return (
         <View>

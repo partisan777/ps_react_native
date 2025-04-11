@@ -5,9 +5,9 @@ export default function CatalogLayout() {
     return (
         <Stack>
             <Stack.Screen
-                name="(tabs_catalog)"
+                name="(tabs)"
                 options={{
-                    headerShown: false, // Убирает заголовок навигации
+                    headerShown: false,
                 }}
         />
         </Stack>
