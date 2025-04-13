@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import { View, FlatList, ActivityIndicator, StyleSheet, Dimensions } from 'react-native';
 import { useAtom } from 'jotai';
-import { productsAtom, loadingAtom } from '../../store/Produts';
+import { productsAtom, loadingProductsAtom } from '../../store/Produts';
 import { CatalogItem } from '../catalog-item/CatalogItem';
 import { CatalogItemProps } from '../catalog-item/CatalogItemProps';
 import axios from 'axios';
@@ -11,7 +11,7 @@ import { ItemNotFound } from '../item-not-found/ItemNotFound';
 
 const CatalogItemsList = ({...props}: CatalogItemListProps) => {
   const [products, setProducts] = useAtom<CatalogItemProps[]>(productsAtom);
-  const [loading, setLoading] = useAtom<boolean>(loadingAtom);
+  const [loading, setLoading] = useAtom<boolean>(loadingProductsAtom);
 
   const { url } = props;
 

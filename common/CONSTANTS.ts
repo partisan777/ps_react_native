@@ -22,6 +22,7 @@ export const RADIUSES = {
     r20: 20,
     r18: 18,
     r16: 16,
+    r14: 14,
     r12: 12,
     r10: 10,
 };

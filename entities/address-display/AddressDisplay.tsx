@@ -1,21 +1,27 @@
 import {View, Text, StyleSheet, Dimensions } from 'react-native'
 import { CustomAnimatedButton } from '../../shared/button/CustomAnimatedButton';
 import { COLORS } from '../../common/CONSTANTS';
+import { destinationAddressAtom } from '@/store/DestinationAddress';
+import { useAtom } from 'jotai';
+import * as Location from 'expo-location';
+import { useRouter } from 'expo-router';
 
 
 export function AddressDisplay() {
+    const router = useRouter();
+    const [address, setAddress] = useAtom<Location.LocationGeocodedAddress[] | null>(destinationAddressAtom);
     const screenWidth = Dimensions.get('window').width;
+
     return (
         <View style={{...styles.container, width: screenWidth}}>
             <Text style={styles.h3}>{'Адрес'}</Text>
             <View style={styles.h1_container}>
-                <Text style={styles.h1}>{'Москва, Новослободская 23'}</Text>
+                <Text style={styles.h1}>{address ? `${address[0].city}, ${address[0].name}` : 'Адрес не определен'}</Text>
                 <CustomAnimatedButton
                     viewStyle={styles.button}
-                    textStyle={{}}
-                    title={''}
                     img={require('../../assets/edit.png')}
                     imgStyle={styles.buttonImg}
+                    onPressOut={() => router.push('/change-address')}
                 />
             </View>
         </View>
