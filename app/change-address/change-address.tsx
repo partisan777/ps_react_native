@@ -76,6 +76,13 @@ export default function ChangeAddress() {
                     numberOfLines={4}
                 />
             </View>
+            <View style={styles.changeAddressButtonContainer}>
+                <CustomAnimatedButton
+                                   title={'Сохранить'}
+                                   viewStyle={styles.changeAddressSaveButtonView}
+                                   textStyle={styles.changeAddressSaveButtonText}
+                               />
+            </View>
          </View>
 
     );
@@ -87,6 +94,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: COLORS.WHITE,
         justifyContent: 'flex-start',
+        alignItems: 'center',
     },
     addressContainer: {
         flexDirection: 'row',
@@ -108,6 +116,11 @@ const styles = StyleSheet.create({
     addressContainerText: {
         flex: 1,
         height: 20,
+        fontFamily: 'Sora',
+        fontWeight: 400,
+        fontSize: 14,
+        color: COLORS.DARK_BROWN,
+
     },
     addressContainerGetLocationButton: {
         height: 34,
@@ -116,5 +129,25 @@ const styles = StyleSheet.create({
     addressContainerGetLocationButtonImg: {
         height: 34,
         width: 34,
+    },
+    changeAddressButtonContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        paddingBottom: 25,
+
+    },
+    changeAddressSaveButtonView: {
+        width: 315,
+        height: 62,
+        borderRadius: RADIUSES.r16,
+        backgroundColor: COLORS.BROWN_LIGHT,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    changeAddressSaveButtonText: {
+        fontFamily: 'Sora',
+        fontWeight: 600,
+        fontSize: 16,
+        color: COLORS.WHITE,
     },
 });
