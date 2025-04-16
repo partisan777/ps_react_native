@@ -2,9 +2,9 @@ import { StyleSheet, View, Text } from "react-native";
 import { OrderScreenHeaderProps } from "./OrderScreenHeaderProps";
 import { CustomAnimatedButton } from "../../shared/button/CustomAnimatedButton";
 import { COLORS } from "../../common/CONSTANTS";
+import { normalize } from '@/utils/utils';
 
 export default function OrderScreenHeader({title, img, onPress}: OrderScreenHeaderProps) {
-
     return(
          <View style={styles.orderHeaderContainer}>
             <View style={styles.orderHeaderButton}>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     },
     orderHeaderText: {
         fontFamily: 'Sora',
-        fontSize: 18,
+        fontSize: normalize(18),
         color: COLORS.DARK_BROWN,
     },
     orderHeadertextContainer: {

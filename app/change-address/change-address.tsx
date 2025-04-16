@@ -36,6 +36,7 @@ export default function ChangeAddress() {
         }
     };
 
+    console.log(address);
     const setValue = () => {
         if (errorMessage) {
             return errorMessage;
@@ -44,13 +45,14 @@ export default function ChangeAddress() {
             return 'Идет загрузка данных';
         };
         if (address) {
-            return `${address[0].city}, ${address[0].name}` ;
+            return `${address[0].country}. ${address[0].city}, ${address[0].street} ${address[0].streetNumber}` ;
         };
         return 'Адрес не определен';
     };
-
-      return (
-         <View style={styles.container}>
+//  `${address[0].city}, ${address[0].name}`
+//  [{"city": "Москва", "country": "Россия", "district": "Юго-Восточный административный округ", "formattedAddress": "Жигулевская ул., 12 корпус 1, Москва, Россия, 109117", "isoCountryCode": "RU", "name": "12 корпус 1", "postalCode": "109117", "region": "Москва", "street": "Жигулевская улица", "streetNumber": "12 корпус 1", "subregion": "Москва", "timezone": null}]
+    return (
+        <View style={styles.container}>
             <OrderScreenHeader
                 title={'Изменить адрес'}
                 img={require('../../assets/arrow-left.png')}
@@ -78,12 +80,12 @@ export default function ChangeAddress() {
             </View>
             <View style={styles.changeAddressButtonContainer}>
                 <CustomAnimatedButton
-                                   title={'Сохранить'}
-                                   viewStyle={styles.changeAddressSaveButtonView}
-                                   textStyle={styles.changeAddressSaveButtonText}
-                               />
+                    title={'Сохранить'}
+                    viewStyle={styles.changeAddressSaveButtonView}
+                    textStyle={styles.changeAddressSaveButtonText}
+                />
             </View>
-         </View>
+        </View>
 
     );
 };

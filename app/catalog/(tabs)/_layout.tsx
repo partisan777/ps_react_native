@@ -25,6 +25,7 @@ export default function TabLayout() {
         name="catalog-tab"
         options={{
           title: '',
+          headerShown: false,
           tabBarIcon: (({ focused }) => <TabIcon focused={focused} title={'Главная'} imgId={1}/>),
         }}
       />
@@ -32,6 +33,7 @@ export default function TabLayout() {
         name="cart-tab"
         options={{
           title: '',
+          headerShown: false,
           tabBarIcon: (({ focused }) => <TabIcon focused={focused} title={'Заказ'}  imgId={2}/>),
         }}
       />

@@ -1,11 +1,14 @@
-import { View, Text, StyleSheet, Image, ImageBackground, Animated } from "react-native";
+import { View, Text, StyleSheet, Image, ImageBackground, Animated, TouchableOpacity, Dimensions } from "react-native";
 import { CatalogItemProps } from './CatalogItemProps';
 import { RADIUSES, COLORS } from '../../common/CONSTANTS';
 import { CustomAnimatedButton } from "../../shared/button/CustomAnimatedButton";
-
+import { useRouter } from "expo-router";
+import { normalize } from '@/utils/utils';
 
 export function CatalogItem (props: CatalogItemProps) {
     const { id, name, subTitle, type, price, image, description, rating } = props;
+    // const navigation = useNavigation();
+    const router = useRouter();
 
     const animatedColorButtonValue = new Animated.Value(100);
 
@@ -25,42 +28,43 @@ export function CatalogItem (props: CatalogItemProps) {
                 duration: 100,
                 useNativeDriver: true
         });
-
+        const dynamicMargin = (Dimensions.get('window').width - styles.container.width * 2 )/4;
         return (
-        <View style={styles.container}>
-            <View>
-                <ImageBackground source={{ uri: image, }} resizeMode="cover" style={styles.mainImage} />
+            <TouchableOpacity onPress={() => router.push(`/catalog/item-details/${id}`)}>
+                <View style={{...styles.container, marginHorizontal: dynamicMargin, marginVertical: dynamicMargin / 2 }}>
+                    <View>
+                        <Image source={{ uri: image, }} resizeMode="cover" style={styles.mainImage} />
+                    </View>
+                    <View style={styles.ratingContainer}>
+                        <Image source={require('../../assets/star.png')} resizeMode="cover" style={styles.ratingImage} />
+                        <Text style={styles.ratingText}>{rating}</Text>
+                    </View>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.mainTitleText}>{name}</Text>
+                        <Text style={styles.subTitleText}>{subTitle}</Text>
+                    </View>
+                    <View style={styles.priceContainer}>
+                        <Text style={styles.price}>{price + ' ₽'}</Text>
+                        <CustomAnimatedButton
+                            title={'+'}
+                            viewStyle={styles.addToCartButtonView}
+                            textStyle={styles.addToCartButtonText}
+                            backGroundColor={colorButton}
+                            fadeIn={fadeInButton}
+                            fadeOut={fadeOutButton}
+                        />
+                    </View>
             </View>
-            <View style={styles.ratingContainer}>
-                <Image source={require('../../assets/star.png')} resizeMode="cover" style={styles.ratingImage} />
-                <Text style={styles.ratingText}>{rating}</Text>
-            </View>
-            <View style={styles.titleContainer}>
-                <Text style={styles.mainTitleText}>{name}</Text>
-                <Text style={styles.subTitleText}>{subTitle}</Text>
-            </View>
-            <View style={styles.priceContainer}>
-                <Text style={styles.price}>{price + ' ₽'}</Text>
-                <CustomAnimatedButton
-                    title={''}
-                    viewStyle={styles.addToCartButtonView}
-                    textStyle={styles.addToCartButtonText}
-                    img={require('../../assets/add.png')}
-                    backGroundColor={colorButton}
-                    fadeIn={fadeInButton}
-                    fadeOut={fadeOutButton}
-                />
-            </View>
-        </View>
-    );
+        </TouchableOpacity>
+    );1
 };
+
 
 const styles = StyleSheet.create({
     container: {
         width: 155,
         height: 280,
         borderRadius: RADIUSES.r16,
-        margin: 20,
         backgroundColor: COLORS.WHITE,
         alignItems: 'center',
         paddingTop: 4,
@@ -93,7 +97,7 @@ const styles = StyleSheet.create({
     ratingText: {
         width: 16,
         height: 13,
-        fontSize: 10,
+        fontSize: normalize(10),
         marginLeft: 5,
         color: COLORS.WHITE,
     },
@@ -101,6 +105,9 @@ const styles = StyleSheet.create({
         marginTop: 12,
         marginBottom: 12,
         paddingLeft: 5,
+        flex: 1,
+        width: '90%',
+        // paddingHorizontal: 25,
         justifyContent: 'flex-start',
         alignItems: 'flex-start'
 
@@ -116,8 +123,8 @@ const styles = StyleSheet.create({
     },
     priceContainer: {
         flex: 1,
+        width: '100%',
         flexDirection: 'row',
-        width: 149,
         height: 40,
         paddingLeft: 12,
         paddingRight: 12,
@@ -135,11 +142,10 @@ const styles = StyleSheet.create({
         width: 32,
         height: 32,
         borderRadius: RADIUSES.r10,
-        padding: 8,
     },
     addToCartButtonText: {
-        width: 16,
-        height: 16,
+        color: COLORS.WHITE,
+        fontSize: normalize(20),
     },
 
 });
