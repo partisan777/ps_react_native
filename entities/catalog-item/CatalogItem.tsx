@@ -30,7 +30,7 @@ export function CatalogItem (props: CatalogItemProps) {
         });
         const dynamicMargin = (Dimensions.get('window').width - styles.container.width * 2 )/4;
         return (
-            <TouchableOpacity onPress={() => router.push(`/catalog/item-details/${id}`)}>
+            <TouchableOpacity onPress={() => router.push(`/catalog/${id}`)}>
                 <View style={{...styles.container, marginHorizontal: dynamicMargin, marginVertical: dynamicMargin / 2 }}>
                     <View>
                         <Image source={{ uri: image, }} resizeMode="cover" style={styles.mainImage} />

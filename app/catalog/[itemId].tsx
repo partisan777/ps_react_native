@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { Link, useLocalSearchParams, useNavigation } from 'expo-router';
+import { useLocalSearchParams, useNavigation } from 'expo-router';
 import OrderScreenHeader from '@/entities/order-screen-header/OrderScreenHeader';
 import { useEffect, useState } from 'react';
 import { CatalogItemProps } from '@/entities/catalog-item/CatalogItemProps';
@@ -11,6 +11,7 @@ import { PRODUCT_SIZE } from '@/common/CONSTANTS';
 import { CustomAnimatedButton } from '@/shared/button/CustomAnimatedButton';
 import { sizeButtonList } from '@/models/ButtonList';
 import { normalize } from '@/utils/utils';
+import {Stack} from 'expo-router';
 
 export default function ItemDetail({param}: any) {
 	const { itemId } = useLocalSearchParams();
@@ -47,13 +48,13 @@ export default function ItemDetail({param}: any) {
 	console.log(11, product);
 	return (
 		<>
+		<Stack.Screen options={{ headerShown: false }} />
 		<OrderScreenHeader
 				title={'Описание'}
-				img={require('../../../assets/arrow-left.png')}
+				img={require('../../assets/arrow-left.png')}
 				onPress={() => navigation.goBack()}
 			/>
 		<View style={styles.itemDetailMainContainer}>
-			
 			{loading ? <Text>Загружаю данные</Text> : <Text></Text>}
 			{error ? <Text>Ошибка</Text> : <Text></Text>}
 				<View style={styles.itemDetailMainImgContainer}>
@@ -65,7 +66,7 @@ export default function ItemDetail({param}: any) {
 					<Text style={styles.itemDetailLabelText}>{product?.subTitle}</Text>
 				</View>
 				<View style={styles.itemDetaiRatingContainer}>
-					<Image style={styles.itemDetaiRatingContainerImg} source={require('../../../assets/star.png')} resizeMode='cover'/>
+					<Image style={styles.itemDetaiRatingContainerImg} source={require('../../assets/star.png')} resizeMode='cover'/>
 					<Text style={styles.itemDetaiRatingContainerText}>{product?.rating}</Text>
 				</View>
 			</View>
@@ -122,8 +123,6 @@ const styles = StyleSheet.create({
 	itemDetailMainImgContainer: {
 		maxWidth: 315,
 		maxHeight: 206,
-		// height: '100%',
-		// width: '100%',
 		marginBottom: 15,
 
 	},
@@ -131,8 +130,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		width: 315,
 		height: 205,
-		// maxHeight: '100%',
-		// maxWidth: '100%',
 		borderRadius: RADIUSES.r16,
 	},
 	smallUnderLine: {
@@ -252,8 +249,6 @@ const styles = StyleSheet.create({
 		fontWeight: 600,
 		fontSize: 18,
 		color: COLORS.BROWN_LIGHT,
-		
-
 	},
 	itemDetailFooterPriceButtonView: {
 		width: 217,
