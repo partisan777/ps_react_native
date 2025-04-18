@@ -1,35 +1,23 @@
-import {useEffect} from 'react';
-import { View, FlatList, ActivityIndicator, StyleSheet, Dimensions } from 'react-native';
+import {useEffect, useState} from 'react';
+import { View, FlatList, ActivityIndicator, StyleSheet, Dimensions, Text } from 'react-native';
 import { useAtom } from 'jotai';
 import { productsAtom, loadingProductsAtom } from '../../store/Produts';
 import { CatalogItem } from '../catalog-item/CatalogItem';
 import { CatalogItemProps } from '../catalog-item/CatalogItemProps';
-import axios from 'axios';
 import { CatalogItemListProps } from './CatalogItemListProps';
 import { ItemNotFound } from '../item-not-found/ItemNotFound';
+import { useFetchProductData } from '@/shared/hooks/useFetchProductData';
 
 
 const CatalogItemsList = ({...props}: CatalogItemListProps) => {
-  const [products, setProducts] = useAtom<CatalogItemProps[]>(productsAtom);
+  const [product, setProduct] = useAtom<CatalogItemProps[]>(productsAtom);
   const [loading, setLoading] = useAtom<boolean>(loadingProductsAtom);
-
+  const [error, setError] = useState(false);
+  
   const { url } = props;
 
   useEffect( () =>  {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(url)
-        setProducts(response.data);
-        setLoading(false);
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          console.error('Axios Error:', error.message);
-        } else {
-          console.error('Неизвестная ошибка:', error);
-        }
-      };
-    };
-    fetchData();
+    useFetchProductData({url, setLoading, setProduct, setError})
   }, [url]);
 
   if (loading) {
@@ -39,8 +27,15 @@ const CatalogItemsList = ({...props}: CatalogItemListProps) => {
       </View>
     );
   };
+  if (error) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Ошибка</Text>
+      </View>
+    );
+  };
 
-  if (!products) {
+  if (!product) {
     return <ItemNotFound />
   };
 
@@ -53,7 +48,7 @@ const CatalogItemsList = ({...props}: CatalogItemListProps) => {
         initialNumToRender={20}
         removeClippedSubviews={false}
         scrollEnabled={true}
-        data={products}
+        data={product}
         numColumns={2}
         renderItem={({ item }) => <CatalogItem {...item} />}
         keyExtractor={(item) => item.id.toString()}

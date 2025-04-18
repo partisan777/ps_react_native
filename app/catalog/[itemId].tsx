@@ -12,40 +12,22 @@ import { CustomAnimatedButton } from '@/shared/button/CustomAnimatedButton';
 import { sizeButtonList } from '@/models/ButtonList';
 import { normalize } from '@/utils/utils';
 import {Stack} from 'expo-router';
+import { useFetchProductData } from '@/shared/hooks/useFetchProductData';
 
 export default function ItemDetail({param}: any) {
 	const { itemId } = useLocalSearchParams();
 	const navigation = useNavigation();
+	const [productSize, setProductSize] = useState<PRODUCT_SIZE>(PRODUCT_SIZE.M);
 	const [product, setProduct] = useState<CatalogItemProps | null >(null);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState(false);
-	const [productSize, setProductSize] = useState<PRODUCT_SIZE>(PRODUCT_SIZE.M);
 
-	// console.log(itemId);
 	const imageUrl = product?.image;
-	useEffect( () =>  {
-		const fetchData = async () => {
-		  const url = `${MAIN_URL}id/${itemId}`
-		  setLoading(true);
-		  try {
-			const response = await axios.get(url)
-			setProduct(response.data);
-			setLoading(false);
-		  } catch (error) {
-			  setError(true);
-			if (axios.isAxiosError(error)) {
-			  console.log('Axios Error:', error);
-			  setLoading(false);
-			} else {
-			  console.log('Неизвестная ошибка:', error);
-			  setLoading(false);
-			}
-		  };
-		};
-		fetchData();
+	const url = `${MAIN_URL}id/${itemId}`
+	useEffect(() =>  {
+		useFetchProductData({url, setLoading, setProduct, setError})
 	  }, []);
-	//   const { id, name, subTitle, type, price, image, description, rating } = product;
-	console.log(11, product);
+
 	return (
 		<>
 		<Stack.Screen options={{ headerShown: false }} />
@@ -55,11 +37,11 @@ export default function ItemDetail({param}: any) {
 				onPress={() => navigation.goBack()}
 			/>
 		<View style={styles.itemDetailMainContainer}>
-			{loading ? <Text>Загружаю данные</Text> : <Text></Text>}
-			{error ? <Text>Ошибка</Text> : <Text></Text>}
-				<View style={styles.itemDetailMainImgContainer}>
-					<Image style={styles.itemDetailMainImg} source={{uri: imageUrl}} resizeMode='stretch'/>
-				</View>
+			<Text>{loading ? 'Загружаю данные' : ''}</Text>
+			<Text>{error ? 'Ошибка' : '' }</Text>
+			<View style={styles.itemDetailMainImgContainer}>
+				<Image style={styles.itemDetailMainImg} source={{uri: imageUrl}} resizeMode='stretch'/>
+			</View>
 			<View style={styles.itemDetailLabelMainContainer}>
 				<View style={styles.itemDetailLabelContainer}>
 					<Text style={styles.itemDetailLabelMainText}>{product?.name}</Text>

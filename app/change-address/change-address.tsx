@@ -36,7 +36,6 @@ export default function ChangeAddress() {
         }
     };
 
-    console.log(address);
     const setValue = () => {
         if (errorMessage) {
             return errorMessage;
