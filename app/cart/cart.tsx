@@ -1,11 +1,15 @@
-import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { CustomAnimatedButton } from "../../shared/button/CustomAnimatedButton";
 import { COLORS, PRODUCT_SIZE, RADIUSES } from "../../common/CONSTANTS";
 import OrderItem from "../../entities/order-item/OrderItem";
 import { OrderItemProps } from "../../entities/order-item/OrderItemProps";
 import OrderPriceItem from "../../entities/order-price-item/OrderPriceItem";
 import CustomLine from "../../shared/custo-line.tsx/CustomLine";
-
+import OrderScreenHeader from "../../entities/order-screen-header/OrderScreenHeader";
+import { useNavigation, useRouter } from "expo-router";
+import { useAtom } from "jotai";
+import * as Location from 'expo-location';
+import { destinationAddressAtom, destinationAddressCommentAtom } from "@/store/DestinationAddress";
 
 const mockProps: OrderItemProps[] = [
     {
@@ -41,29 +45,31 @@ const mockPriceItemData = [
 ];
 
 export default function Cart() {
-    const containerHeight = Dimensions.get('window').height - 550;
+    const navigation = useNavigation();
+    const router = useRouter();
+    const [address, setAddress] = useAtom<Location.LocationGeocodedAddress[] | null>(destinationAddressAtom);
+    const [comment, setComment] = useAtom<string | null>(destinationAddressCommentAtom);
 
     return (
         <View style={styles.cartContainer}>
-            <View style={styles.cartHeaderContainer}>
-                <View style={styles.cartHeaderButton}>
-                    <CustomAnimatedButton
-                        imgStyle={styles.cartHeaderButtonImg}
-                        img={require('../../assets/arrow-left.png')}
-                    />
-                </View>
-                <Text style={styles.cartHeaderText}>{'Заказ'}</Text>
-            </View>
+            <OrderScreenHeader
+                title={'Заказ'}
+                img={require('../../assets/arrow-left.png')}
+                onPress={() => navigation.goBack()}
+            />
             <View style={styles.destinationAddressContainer}>
                 <Text style={styles.destinationAddressHeader}>{'Адрес доставки'}</Text>
-                <Text style={styles.destinationAddressAddress}>{'Москва, Новослободская 23'}</Text>
-                <Text style={styles.destinationAddressComment}>{'Позвонить около входа в бизнес центр'}</Text>
+                <Text style={styles.destinationAddressAddress}>
+                    {address ? `${address[0].city}, ${address[0].name}` : 'Адрес не определен'};
+                </Text>
+                <Text style={styles.destinationAddressComment}>{comment}</Text>
                 <CustomAnimatedButton
                         title={'Редактировать адрес'}
                         viewStyle={styles.destinationAddressChangeButtonView}
                         textStyle={styles.destinationAddressChangeButtonText}
                         imgStyle={styles.destinationAddressChangeButtonImg}
                         img={require('../../assets/edit-black.png')}
+                        onPressOut={() => router.push('/change-address')}
                     />
             </View>
             <CustomLine {...styles.smallUnderLine} />
@@ -97,35 +103,12 @@ export default function Cart() {
     )
 };
 
-
 const styles = StyleSheet.create({
     cartContainer: {
         flex: 1,
         width: '100%',
         backgroundColor: COLORS.WHITE,
         justifyContent: 'flex-start',
-    },
-    cartHeaderContainer: {
-        width: '100%',
-        height: 55,
-        flexDirection: 'row',
-        paddingVertical: 15,
-        paddingHorizontal: 30,
-    },
-    cartHeaderButton: {
-        width: 24,
-        height:24,
-        flex: 1,
-    },
-    cartHeaderButtonImg: {
-        width: 20,
-        height: 20,
-    },
-    cartHeaderText: {
-        fontFamily: 'Sora',
-        fontSize: 18,
-        color: COLORS.DARK_BROWN,
-        flex: 1.3,
     },
     destinationAddressContainer: {
         marginHorizontal: 25,

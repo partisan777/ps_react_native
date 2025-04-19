@@ -4,8 +4,6 @@ import { COLORS } from '../common/CONSTANTS';
 import { CustomAnimatedButton } from '../shared/button/CustomAnimatedButton';
 import { useRouter } from 'expo-router';
 
-
-
 export default function StartScreen() {
 
   const router = useRouter();
@@ -32,7 +30,7 @@ export default function StartScreen() {
 ////Animation padding top
   const windowHeight = Dimensions.get('window').height;
   const paddingAnimation = (
-    styles.button.height  * 1.5 +
+    styles.button.height  * 1.75 +
     styles.button.marginBottom +
     styles.h3.maxHeight +
     styles.h3.marginBottom +
@@ -133,7 +131,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   }, animatedTextWiew: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     height: 100,
     flexGrow: 1,

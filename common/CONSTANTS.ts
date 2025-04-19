@@ -15,6 +15,7 @@ export const COLORS = {
     TEXT_DARK_GREY: '#303336',
     LIGHT_GRAY: '#EAEAEA',
     TAB_BAR_LIGHT_GRAY: '#DEDEDE',
+    SIZ_BUTTON_OPACITY: '#C67C4E 0.8',
 };
 
 export const RADIUSES = {
@@ -22,6 +23,7 @@ export const RADIUSES = {
     r20: 20,
     r18: 18,
     r16: 16,
+    r14: 14,
     r12: 12,
     r10: 10,
 };
